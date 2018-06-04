@@ -4,7 +4,7 @@ function countUniqueWords(array) {
     array.forEach(function(word2) {
       if (word === word2) counter.push(word);
     });
-    $("#results").append("<li>" + word + ": " + counter.length + "</li>");
+    $("#results").append("<li class='list-item'>" + word + ": " + counter.length + "</li>");
   });
 }
 
