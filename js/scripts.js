@@ -55,8 +55,8 @@ $(document).ready(function() {
 
     resetOutput();
     var input = $("#inputWords").val();
-    lowercaseList = makeLowercase(input);
-    noPunctuatio = removePunctuation(lowercaseList);
-    countAndDisplay(noPunctation);
+    var lowercaseList = makeLowercase(input);
+    var noPunctuation = removePunctuation(lowercaseList);
+    countAndDisplay(noPunctuation);
   });
 });
