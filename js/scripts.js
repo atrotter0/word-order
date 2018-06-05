@@ -59,4 +59,10 @@ $(document).ready(function() {
     var noPunctuation = removePunctuation(lowercaseList);
     countAndDisplay(noPunctuation);
   });
+
+  $("#reset").click(function(e) {
+    e.preventDefault();
+
+    location.reload();
+  });
 });
