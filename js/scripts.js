@@ -1,4 +1,9 @@
-function lowerCaseWords(input) {
+function resetOutput() {
+  $("li").remove();
+  $(".well").addClass("fancy-box");
+}
+
+function makeLowercase(input) {
   var wordsList = input.split(" ");
   var lowercaseList = wordsList.map(function(word) {
     return word.toLowerCase();
@@ -7,32 +12,42 @@ function lowerCaseWords(input) {
 }
 
 function countAndDisplay(inputArray) {
+  var wordStorage = [];
   inputArray.forEach(function(word) {
     var counter = [];
     inputArray.forEach(function(word2) {
       if (word === word2) counter.push(word);
     });
-    displayWord(counter, word);
+    findUniqueWords(counter, word, wordStorage);
+  });
+  displayResults(wordStorage);
+}
+
+function findUniqueWords(counter, word, wordStorage) {
+  var wordAndCount = word + ": " + counter.length;
+  if (!wordStorage.includes(wordAndCount)) {
+    wordStorage.push(wordAndCount);
+  }
+}
+
+function displayResults(wordStorage) {
+  wordStorage.forEach(function(item) {
+    $("#results").append("<li class='list-item'>" + item + "</li>");
   });
 }
 
-function displayWord(counter, word) {
-  var wordAndCount = word + ":" + counter.length;
-  var values = $("li").text().split(" ");
+function removePunctuation(input) {
 
-  if (!values.includes(wordAndCount)) {
-    $("#results").append("<li class='list-item'>" + word + ":" + counter.length + " </li>");
-  }
 }
 
 $(document).ready(function() {
   $("#submit").click(function(e) {
     e.preventDefault();
 
-    $("li").remove();
-    $(".well").addClass("fancy-box");
+    resetOutput();
     var input = $("#inputWords").val();
-    var lowercaseInput = lowerCaseWords(input);
-    countAndDisplay(lowercaseInput);
+    var input = makeLowercase(input);
+    var input = removePunctuation(input);
+    countAndDisplay(input);
   });
 });
