@@ -1,6 +1,6 @@
 function resetOutput() {
   $("li").remove();
-  $(".well").addClass("fancy-box");
+  $(".row").addClass("fancy-box");
 }
 
 function makeLowercase(input) {
@@ -9,6 +9,19 @@ function makeLowercase(input) {
     return word.toLowerCase();
   });
   return lowercaseList;
+}
+
+function removePunctuation(wordList) {
+  var pattern = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/;
+  var newList = wordList.map(function(word) {
+    var position = word.search(pattern);
+    if (position >= 0) {
+      symbol = word.substring(position);
+      word = word.replace(symbol, "");
+    }
+    return word;
+  });
+  return newList;
 }
 
 function countAndDisplay(inputArray) {
@@ -36,18 +49,14 @@ function displayResults(wordStorage) {
   });
 }
 
-function removePunctuation(input) {
-
-}
-
 $(document).ready(function() {
   $("#submit").click(function(e) {
     e.preventDefault();
 
     resetOutput();
     var input = $("#inputWords").val();
-    var input = makeLowercase(input);
-    var input = removePunctuation(input);
-    countAndDisplay(input);
+    lowercaseList = makeLowercase(input);
+    noPunctuatio = removePunctuation(lowercaseList);
+    countAndDisplay(noPunctation);
   });
 });
