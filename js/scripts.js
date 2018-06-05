@@ -1,19 +1,24 @@
-function countUniqueWords(array) {
-  array.forEach(function(word) {
+function lowerCaseWords(input) {
+  var wordsList = input.split(" ");
+  var lowercaseList = wordsList.map(function(word) {
+    return word.toLowerCase();
+  });
+  return lowercaseList;
+}
+
+function countUniqueWords(inputArray) {
+  inputArray.forEach(function(word) {
     var counter = [];
-    array.forEach(function(word2) {
+    inputArray.forEach(function(word2) {
       if (word === word2) counter.push(word);
     });
-    $("#results").append("<li class='list-item'>" + word + ": " + counter.length + "</li>");
+    filterAndDisplay();
+    //$("#results").append("<li class='list-item'>" + word + ": " + counter.length + "</li>");
   });
 }
 
-function lowerCaseWords(input) {
-  var words = input.split(" ");
-  var lowerCase = words.map(function(item) {
-    return item.toLowerCase();
-  });
-  return lowerCase;
+function filterAndDisplay() {
+
 }
 
 $(document).ready(function() {
@@ -21,9 +26,7 @@ $(document).ready(function() {
     e.preventDefault();
 
     var input = $("#inputWords").val();
-    var newInput = lowerCaseWords(input);
-    countUniqueWords(newInput);
+    var lowercaseInput = lowerCaseWords(input);
+    countUniqueWords(lowercaseInput);
   });
 });
-
-// Type type type stuff stuff hey hi hello
